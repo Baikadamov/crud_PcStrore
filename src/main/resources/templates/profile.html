@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout/main.html"
+      xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" type="text/css" th:href="@{'/css/bootstrap.min.css'}">
+        <title>Title</title>
+    </head>
+    <body>
+
+        <div layout:fragment="mainContent">
+            <div class="container" style="margin-bottom: 330px">
+                <div class="row mx-auto">
+                    <div align="center">
+                        <h1 class="mt-5  text-center" > Welcome</h1>
+                        <img src="https://cdn-icons-png.flaticon.com/512/64/64572.png" style="width:120px;height:120px" alt="">
+                        <h2 class="mt-2  text-center" >   <b> <span th:text="${currentUser.full_name}"></span> </b>  </h2>
+                        <div class="container" style="padding-left: 320px ; padding-right: 320px">
+                            <p  sec:authorize="hasAnyRole('ROLE_MODERATOR')"   class="text-center" >Модератор/Администратор сайта имеет возможность управлять базой данных , совершать действия над ними;изменять,удалять,добавлять.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </body>
+<script type="text/javascript" th:src="@{'/js/bootstrap.bundle.js'}"></script>
+</html>

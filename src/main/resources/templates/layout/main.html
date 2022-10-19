@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" type="text/css" th:href="@{'/css/bootstrap.min.css'}">
+        <title>Title</title>
+    </head>
+    <body>
+         <div>
+
+
+             <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="height: 70px">
+                 <div class="container-fluid">
+                     <a class="navbar-brand" th:href="@{'/'}">INVASION</a>
+                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                         <span class="navbar-toggler-icon"></span>
+                     </button>
+                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                             <li class="nav-item"  >
+                                 <a class="nav-link" th:href="@{'/bonuses'}">Бонусы</a>
+                             </li>
+                             <li class="nav-item" sec:authorize="isAnonymous()">
+                                 <a class="nav-link" th:href="@{'/login'}">Login</a>
+                             </li>
+<!--                             <li class="nav-item" sec:authorize="hasAnyRole('ROLE_ADMIN')">-->
+<!--                                 <a class="nav-link" th:href="@{'/adminpanel'}">Admin panel</a>-->
+<!--                             </li>-->
+                             <li class="nav-item" sec:authorize="hasAnyRole('ROLE_MODERATOR')">
+                                 <a class="nav-link" th:href="@{'/moderatorpanel'}">Moder panel</a>
+                             </li>
+                             <li class="align-items-md-end" sec:authorize="isAnonymous()">
+                                 <a class="nav-link" th:href="@{'/register'}">Register</a>
+                             </li>
+                             <li class="nav-item dropdown" sec:authorize="isAuthenticated()">
+                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                     <span th:text="${currentUser.full_name}"></span>
+                                 </a>
+                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                     <li><a class="dropdown-item" th:href="@{/profile}">Profile</a></li>
+                                     <li><hr class="dropdown-divider"></li>
+                                     <li><a class="dropdown-item" href="JavaScript:void(0)" onclick="document.getElementById('logoutForm').submit()">logout</a>
+                                 </ul>
+                                 <form th:action="@{'/signout'}" method="post" id="logoutForm">
+
+                                 </form>
+
+                             </li>
+                         </ul>
+                         <form class="d-flex">
+                             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                             <button class="btn btn-outline-primary" type="submit">Search</button>
+                         </form>
+                     </div>
+                 </div>
+             </nav>
+
+        </div>
+
+
+
+                <div class="col-12" layout:fragment="mainContent">
+                </div>
+
+         <footer class="text-center text-lg-start bg-dark text-muted"  style="margin-top: 150px">
+             <section
+                     class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom"
+             >
+             </section>
+             <section class="">
+                 <div class="container text-center text-md-start mt-5">
+                     <div class="row mt-3">
+                         <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+                             <h6 class="text-uppercase fw-bold mb-4">
+                                 <i class="fas fa-gem me-3"></i> Invasion
+                             </h6>
+                             <p>
+                                 Чтобы производить лучшие компьютеры мы готовы приложить любые усилия.
+
+                                 Проявить скрупулёзную тщательность при выборе материалов и комплектующих, сборке и тестировании. При проектировании отнестись с вниманием и любовью к каждой детали ПК.
+
+                                 Проявить выдержку, когда возникает необходимость испытать новые технологические подходы или усовершенствовать уже имеющиеся.
+                             </p>
+                         </div>
+                         <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+                             <h6 class="text-uppercase fw-bold mb-4">
+                                 Мы в городах
+                             </h6>
+                             <p>
+                                 <a href="#!" class="text-reset">Алматы</a>
+                             </p>
+                             <p>
+                                 <a href="#!" class="text-reset">Нур-Султан (Астана)
+
+                                 </a>
+                             </p>
+                             <p>
+                                 <a href="#!" class="text-reset">Шымкент</a>
+                             </p>
+                             <p>
+                                 <a href="#!" class="text-reset">Костанай</a>
+                             </p>
+                         </div>
+                         <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+                             <h6 class="text-uppercase fw-bold mb-4">
+                             </h6>
+                             <p>
+                                 <a href="#!" class="text-reset">Актау</a>
+                             </p>
+                             <p>
+                                 <a href="#!" class="text-reset">Караганда</a>
+                             </p>
+                             <p>
+                                 <a href="#!" class="text-reset">Петропавл</a>
+                             </p>
+                             <p>
+                                 <a href="#!" class="text-reset">Атырау</a>
+                             </p>
+                         </div>
+                         <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+                             <h6 class="text-uppercase fw-bold mb-4">
+                                 КОНТАКТЫ
+                             </h6>
+                             <p><i class="fas fa-home me-3"></i> [M]Invasion</p>
+                             <p>
+                             <p><i class="fas fa-home me-3"></i>Автор: <a href=" "> Байкадамов Максат
+                             </a> </p>
+                             <p>
+                                 <i class="fas fa-envelope me-3"></i> Почта: <a href="https://www.google.com/intl/ru/gmail/about/">maxat.baikadamov @narxoz.kz </a>
+                             </p>
+                             <p>
+                                 <i class="fas fa-envelope me-3"></i> Инстаграм: <a href="https://www.instagram.com/ugly.mb/"> @ugly.mb</a>
+                             </p>
+                             <p><i class="fas fa-phone me-3"></i> WhatsApp: +7 (708) 494 1956 </p>
+                         </div>
+                     </div>
+                 </div>
+             </section>
+             <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+                 © 2022 :
+                 <a class="text-reset fw-bold" href="main.html" > [M]Invasion  </a>
+             </div>
+         </footer>
+
+    </body>
+    <script type="text/javascript" th:src="@{'/js/bootstrap.bundle.js'}"></script>
+</html>

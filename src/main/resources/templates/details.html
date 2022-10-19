@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout/main.html">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" th:href="@{'/css/bootstrap.min.css'}">
+    <title>Title</title>
+</head>
+<body>
+<div layout:fragment="mainContent">
+<!--    <form th:action="@{'/savePc'}" method="post" th:if="${pc!=null}">-->
+<!--        <input type="hidden" name="pc_id" th:value="${pc.id}">-->
+<!--        pc_name : <input type="text" name="pc_name" th:value="${pc.name}">-->
+<!--        pc_image : <input type="text" name="pc_image" th:value="${pc.description}">-->
+<!--        pc_proc : <input type="text" name="pc_proc" th:value="${pc.proc}">-->
+<!--        pc_video : <input type="text" name="pc_video" th:value="${pc.video}">-->
+<!--        pc_ozu : <input type="text" name="pc_ozu" th:value="${pc.ozu}">-->
+<!--        pc_memory : <input type="text" name="pc_memory" th:value="${pc.memory}">-->
+<!--        pc_price : <input type="number" name="pc_price" th:value="${pc.price}">-->
+<!--        GIFT <select name="bonus_id">-->
+<!--            <option th:each="bonus : ${bonuses}" th:text="${bonus.name}" th:value="${bonus.id}" th:selected="${bonus.id==pc.bonus.id}"></option>-->
+<!--        </select>-->
+<!--        <button > save</button>-->
+<!--    </form>-->
+
+<!--    <form th:action="@{'/deletePc'}" method="post" th:if="${pc!=null}">-->
+<!--        <input type="hidden" name="pc_id" th:value="${pc.id}">-->
+<!--        <button > delete pc</button>-->
+<!--    </form>-->
+
+
+    <div class="bd-masthead mb-3" id="content">
+        <div class="container px-4 px-md-3">
+            <div class="row align-items-lg-center">
+                <div class="col-8 mx-auto col-md-4 order-md-2 col-lg-5 mt-5">
+                    <form th:action="@{'/savePc'}" method="post" th:if="${pc!=null}">
+                        <input type="hidden" name="pc_id" th:value="${pc.id}">
+                    <div class="form-group">
+                        <label>Название PC</label>
+                        <input type="text" name="pc_name" class="form-control" th:value="${pc.name}">
+                    </div>
+                    <div class="form-group">
+                        <label>Изображение в виде URL ссылки</label>
+                        <input type="text"  name="pc_image"  class="form-control" th:value="${pc.description}" >
+                    </div>
+                    <div class="form-group">
+                        <label>Процессор</label>
+                        <input type="text"   name="pc_proc" class="form-control" th:value="${pc.proc}">
+                    </div>
+                    <div class="form-group">
+                        <label>Видеокарта</label>
+                        <input type="text"  name="pc_video"  class="form-control" th:value="${pc.video}" >
+                    </div>
+                    <div class="form-group">
+                        <label>Оперативная память</label>
+                        <input type="text"  name="pc_ozu"  class="form-control" th:value="${pc.ozu}">
+                    </div>
+                    <div class="form-group">
+                        <label>SSD накопитель</label>
+                        <input type="text"  name="pc_memory"  class="form-control" th:value="${pc.memory}">
+                    </div>
+                        <div class="form-group">
+                            <label>Цена</label>
+                            <input type="text"  name="pc_price"    class="form-control" th:value="${pc.price}">
+                        </div>
+                    <div class="form-group">
+                        <label>БОНУС</label>
+                        <select name="bonus_id" class="form-select">
+                            <option th:each="bonus : ${bonuses}" th:text="${bonus.name}" th:value="${bonus.id}" th:selected="${bonus.id==pc.bonus.id}"></option>
+                        </select>
+                    </div>
+
+                    <div class="form-group mt-3"  sec:authorize="hasAnyRole('ROLE_MODERATOR')">
+                        <button  class="btn btn-primary btn-sm" >
+                            Изменить
+                        </button>
+                    </div>
+                    </form>
+                    <div class="form-group mt-3 " sec:authorize="hasAnyRole('ROLE_MODERATOR')">
+                        <form th:action="@{'/deletePc'}" method="post" th:if="${pc!=null}">
+                            <input class="form-control" type="hidden" name="pc_id" th:value="${pc.id}">
+                            <button class="btn btn-danger btn-sm " > Удалить</button>
+                        </form>
+                    </div>
+                    <div class="form-group mt-3">
+                        <a th:href="@{'/'}"  class="btn btn-dark btn-sm" >
+                            Вернуться на главную
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-8 order-md-1 col-lg-7 text-center text-md-start  ">
+                    <div class="form-group "  style="padding: 130px" >
+                        <img th:src="${pc.description}"   class="card-img-top card" >
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+</body>
+</html>

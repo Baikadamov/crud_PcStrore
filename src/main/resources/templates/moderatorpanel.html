@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout/main.html"
+      xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" th:href="@{'/css/bootstrap.min.css'}">
+    <title>Title</title>
+</head>
+<body>
+
+<div layout:fragment="mainContent">
+    <div class="container mt-5" sec:authorize="hasAnyRole('ROLE_MODERATOR')">
+        <div class="container mt-3 mb-5"  style="padding-right: 320px ; padding-left: 320px" >
+            <div class="mx-auto">
+                <h3>С привелегией модератора/админа вы можете добавить новую сборку</h3>
+            </div>
+            <form class="form" th:action="@{'/addPc'}" method="post">
+                <div class="form-group mt-2">
+                    <label> Название компьютера</label>
+                    <input type="text" class="form-control" name="pc_name">
+                </div>
+                <div class="form-group mt-2">
+                    <label> Url ссылка на изображение </label>
+                    <input type="text" class="form-control" name="pc_image">
+                </div>
+                <div class="form-group mt-2">
+                    <label> Процессор </label>
+                    <input type="text" class="form-control" name="pc_proc">
+                </div>
+                <div class="form-group mt-2">
+                    <label> Видеокарта </label>
+                    <input type="text"  class="form-control" name="pc_video">
+                </div>
+                <div class="form-group mt-2">
+                    <label> Оперативная память</label>
+                    <input type="text"  class="form-control" name="pc_ozu">
+                </div>
+                <div class="form-group mt-2">
+                    <label> Ssd накопитель </label>
+                    <input type="text" class="form-control" name="pc_memory">
+                </div>
+                <div class="form-group mt-2">
+                    <label> Цена </label>
+                    <input type="number"  class="form-control"name="pc_price">
+                </div>
+                <div class="form-group mt-2">
+                    <label>В подарок</label>
+                    <select name="bonus_id" class="form-control" >
+                        <option   th:each="bonus : ${bonuses}" th:text="${bonus.name}" th:value="${bonus.id}"></option>
+                    </select>
+                </div>
+                <div class="form-group mt-2">
+                    <button class="btn btn-dark  " > Добавить новую сборку</button>
+                </div>
+            </form>
+
+            <div class="mt-5">
+                <div class="mx-auto">
+                    <h3>Добавление Подарков</h3>
+                </div>
+                <form class="form" th:action="@{'/addBonus'}" method="post">
+                    <div class="form-group mt-2">
+                        <label> Название подарка</label>
+                        <input type="text" class="form-control" name="bonus_name">
+                    </div>
+                    <div class="form-group mt-2">
+                        <label> Url ссылка на изображение </label>
+                        <input type="text" class="form-control" name="bonus_img">
+                    </div>
+                    <div class="form-group mt-2">
+                        <label> Описание </label>
+                        <input type="text" class="form-control" name="bonus_decr">
+                    </div>
+                    <div class="form-group mt-2">
+                        <button class="btn btn-dark  " > Добавить новый подарок</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    </div>
+
+</div>
+</body>
+<script type="text/javascript" th:src="@{'/js/bootstrap.bundle.js'}"></script>
+</html>
